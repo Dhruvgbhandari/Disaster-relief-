@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Google Maps API -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAyo_-ISohiVh1Gt0W66B5qzspKNZOJws&libraries=places"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 
 <body>
@@ -21,13 +23,13 @@
             <div class="nav-container">
                 <h1>Disaster Relief Resource Locator</h1>
                 <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="map.html">Interactive Map</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="help.html">Help</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#map">Interactive Map</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#help">Help</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#donate">Donate</a></li>
                 </ul>
                 <div class="hamburger">
                     <span class="bar"></span>
@@ -40,25 +42,537 @@
             <h1>Welcome to Disaster Relief Resource Locator</h1>
             <p>Find essential resources during emergencies in Dahanu and Palghar, Maharashtra</p>
             <div class="hero-buttons">
-                <a href="map.html" class="btn-primary">View Interactive Map</a>
-                <a href="resources.html" class="btn-secondary">Browse Resources</a>
+                <a href="#map" class="btn-primary">View Interactive Map</a>
+                <a href="#resources" class="btn-secondary">Browse Resources</a>
             </div>
         </div>
     </header>
 
     <main>
-        <div id="search-container">
-            <input type="text" id="location-input" placeholder="Enter your location">
-            <button id="search-btn"><i class="fas fa-search"></i> Search</button>
-            <button id="current-location-btn"><i class="fas fa-map-marker-alt"></i> Use Current Location</button>
-        </div>
+        <section id="home" class="page-section active">
+            <div class="hero-content">
+                <h1>Welcome to Disaster Relief Resource Locator</h1>
+                <p>Find essential resources during emergencies in Dahanu and Palghar, Maharashtra</p>
+                <div class="hero-buttons">
+                    <a href="#map" class="btn-primary">View Interactive Map</a>
+                    <a href="#resources" class="btn-secondary">Browse Resources</a>
+                </div>
+            </div>
 
-        <div id="map"></div>
 
-        <div id="resource-list">
-            <h2>Nearby Resources</h2>
-            <ul id="resources"></ul>
-        </div>
+
+            <div id="search-container">
+                <input type="text" id="location-input" placeholder="Enter your location">
+                <button id="search-btn"><i class="fas fa-search"></i> Search</button>
+                <button id="current-location-btn"><i class="fas fa-map-marker-alt"></i> Use Current Location</button>
+                <div id="loading-spinner" class="hidden"><i class="fas fa-spinner fa-spin"></i> Searching...</div>
+            </div>
+
+            <div id="map"></div>
+
+            <div id="resource-list">
+                <h2>Nearby Resources</h2>
+                <ul id="resources"></ul>
+            </div>
+
+
+        </section>
+
+        <section id="about" class="page-section">
+            <div class="content-section">
+                <div class="about-container">
+                    <div class="mission-section">
+                        <h2>Our Mission</h2>
+                        <p>During disasters and emergencies, access to essential resources can mean the difference
+                            between life and death. Our mission is to bridge the gap between those in need and the
+                            resources available in their communities. We believe that timely, accurate information can
+                            save lives and help communities recover faster.</p>
+
+                        <div class="mission-stats">
+                            <div class="stat">
+                                <i class="fas fa-users"></i>
+                                <div class="stat-number">10,000+</div>
+                                <div class="stat-label">People Helped</div>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Resources Mapped</div>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-clock"></i>
+                                <div class="stat-number">24/7</div>
+                                <div class="stat-label">Support Available</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="story-section">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2020 during the height of the global pandemic, our organization was born from the
+                            urgent need for better coordination of disaster relief efforts. We witnessed firsthand how
+                            communities struggled to find essential resources when they needed them most.</p>
+                        <p>What started as a small volunteer effort has grown into a comprehensive platform that
+                            connects people with shelters, food banks, medical facilities, and emergency services across
+                            multiple regions. Our technology combines real-time data with user-friendly interfaces to
+                            ensure that help is always just a few clicks away.</p>
+                    </div>
+
+                    <div class="impact-section">
+                        <h2>Our Impact</h2>
+                        <p>Every day, our platform helps connect thousands of people with the resources they need during
+                            critical moments. Here's how we're making a difference:</p>
+
+                        <div class="impact-highlights">
+                            <div class="highlight">
+                                <h4>Real-Time Resource Updates</h4>
+                                <p>Our team works around the clock to verify and update resource information, ensuring
+                                    accuracy during rapidly changing disaster situations.</p>
+                            </div>
+                            <div class="highlight">
+                                <h4>Community Partnerships</h4>
+                                <p>We collaborate with local governments, NGOs, and relief organizations to expand our
+                                    network of available resources.</p>
+                            </div>
+                            <div class="highlight">
+                                <h4>Accessible Technology</h4>
+                                <p>Our platform is designed to work on any device, ensuring that help is accessible to
+                                    everyone, regardless of their technological resources.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-section">
+                        <h2>Our Values</h2>
+                        <div class="team-values">
+                            <div class="value">
+                                <i class="fas fa-heart"></i>
+                                <h4>Compassion</h4>
+                                <p>We approach every situation with empathy and understanding, recognizing that
+                                    disasters affect real people with real needs.</p>
+                            </div>
+                            <div class="value">
+                                <i class="fas fa-shield-alt"></i>
+                                <h4>Reliability</h4>
+                                <p>We are committed to providing accurate, up-to-date information that communities can
+                                    depend on during critical moments.</p>
+                            </div>
+                            <div class="value">
+                                <i class="fas fa-hands-helping"></i>
+                                <h4>Collaboration</h4>
+                                <p>We believe that the best solutions come from working together with communities,
+                                    governments, and relief organizations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="partners-section">
+                        <h2>Our Partners</h2>
+                        <p>We work closely with established organizations to ensure comprehensive coverage and reliable
+                            information.</p>
+
+                        <div class="partners-grid">
+                            <div class="partner">
+                                <i class="fas fa-building"></i>
+                                <h4>FEMA</h4>
+                                <p>Federal Emergency Management Agency</p>
+                            </div>
+                            <div class="partner">
+                                <i class="fas fa-plus"></i>
+                                <h4>Red Cross</h4>
+                                <p>American Red Cross</p>
+                            </div>
+                            <div class="partner">
+                                <i class="fas fa-home"></i>
+                                <h4>Salvation Army</h4>
+                                <p>The Salvation Army</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="join-us">
+                        <h2>Join Our Mission</h2>
+                        <p>Help us expand our reach and improve our services. Whether you're a developer, volunteer, or
+                            supporter, there are many ways to get involved.</p>
+
+                        <div class="join-actions">
+                            <a href="#contact" class="join-btn">
+                                <i class="fas fa-user-plus"></i>
+                                Volunteer With Us
+                            </a>
+                            <a href="#donate" class="join-btn">
+                                <i class="fas fa-heart"></i>
+                                Make a Donation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="page-section">
+            <div class="content-section">
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Shelter & Housing</h3>
+                        <p>Find emergency shelters, temporary housing, and long-term recovery housing options.</p>
+                        <ul>
+                            <li>Emergency evacuation centers</li>
+                            <li>Temporary housing assistance</li>
+                            <li>Long-term recovery programs</li>
+                            <li>Pet-friendly accommodations</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Food & Nutrition</h3>
+                        <p>Access to food banks, meal distribution centers, and nutritional support services.</p>
+                        <ul>
+                            <li>Food banks and pantries</li>
+                            <li>Hot meal programs</li>
+                            <li>Special dietary needs</li>
+                            <li>School meal programs</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <h3>Medical & Health</h3>
+                        <p>Healthcare services, mental health support, and medical supply distribution.</p>
+                        <ul>
+                            <li>Emergency medical care</li>
+                            <li>Mental health services</li>
+                            <li>Prescription assistance</li>
+                            <li>Medical equipment loans</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3>Water & Sanitation</h3>
+                        <p>Clean water distribution, sanitation facilities, and hygiene supplies.</p>
+                        <ul>
+                            <li>Water distribution points</li>
+                            <li>Portable toilets</li>
+                            <li>Hygiene kits</li>
+                            <li>Water purification systems</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h3>Supplies & Equipment</h3>
+                        <p>Essential supplies, clothing, and equipment for disaster recovery.</p>
+                        <ul>
+                            <li>Clothing and bedding</li>
+                            <li>Household essentials</li>
+                            <li>Baby supplies</li>
+                            <li>Tools and equipment</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Educational Support</h3>
+                        <p>Educational resources and support for students affected by disasters.</p>
+                        <ul>
+                            <li>School supplies</li>
+                            <li>Tutoring programs</li>
+                            <li>Online learning resources</li>
+                            <li>Educational counseling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="additional-resources">
+                    <h2>Additional Resources</h2>
+                    <div class="resource-links">
+                        <div class="link-group">
+                            <h4>Government Agencies</h4>
+                            <ul>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Federal
+                                        Emergency Management Agency (FEMA)</a></li>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Department of
+                                        Homeland Security</a></li>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Centers for
+                                        Disease Control (CDC)</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="link-group">
+                            <h4>Non-Profit Organizations</h4>
+                            <ul>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> American Red
+                                        Cross</a></li>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Salvation
+                                        Army</a></li>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> United Way</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="link-group">
+                            <h4>Local Resources</h4>
+                            <ul>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Local Emergency
+                                        Management</a></li>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Community
+                                        Centers</a></li>
+                                <li><a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Faith-Based
+                                        Organizations</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="help" class="page-section">
+            <div class="content-section">
+                <div class="help-container">
+                    <div class="faq-section">
+                        <h2>Frequently Asked Questions</h2>
+                        <div class="faq-item">
+                            <h3>How do I find nearby resources?</h3>
+                            <p>Use our interactive map to search for resources in your area. You can enter your location
+                                or use your current location for the most accurate results.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>What types of resources are available?</h3>
+                            <p>We provide information on shelters, food distribution centers, medical facilities, water
+                                supplies, and essential supplies for disaster relief.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>How often is the information updated?</h3>
+                            <p>Our team works around the clock to verify and update resource information, especially
+                                during active disaster situations.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>Can I volunteer or donate?</h3>
+                            <p>Yes! We welcome volunteers and donations. Contact us through our contact page to learn
+                                more about how you can help.</p>
+                        </div>
+                    </div>
+
+                    <div class="help-resources">
+                        <h2>Helpful Resources</h2>
+                        <div class="help-links">
+                            <div class="help-link">
+                                <i class="fas fa-book"></i>
+                                <div>
+                                    <h4>Disaster Preparedness Guide</h4>
+                                    <p>Learn how to prepare for various types of disasters and emergencies.</p>
+                                    <a href="#" class="help-btn">Download Guide</a>
+                                </div>
+                            </div>
+                            <div class="help-link">
+                                <i class="fas fa-video"></i>
+                                <div>
+                                    <h4>Emergency Response Videos</h4>
+                                    <p>Watch instructional videos on emergency response and safety procedures.</p>
+                                    <a href="#" class="help-btn">Watch Videos</a>
+                                </div>
+                            </div>
+                            <div class="help-link">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Emergency Hotlines</h4>
+                                    <p>Access to emergency hotlines and support services in your area.</p>
+                                    <a href="#" class="help-btn">View Contacts</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-support">
+                        <h2>Still Need Help?</h2>
+                        <p>If you can't find what you're looking for, our support team is here to assist you.</p>
+                        <div class="support-options">
+                            <a href="#contact" class="support-btn">
+                                <i class="fas fa-envelope"></i>
+                                Contact Support
+                            </a>
+                            <a href="#" class="support-btn">
+                                <i class="fas fa-comments"></i>
+                                Live Chat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section">
+            <div class="content-section">
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h2>Get In Touch</h2>
+                        <p>Have questions, feedback, or want to get involved? We'd love to hear from you.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email Us</strong>
+                                    <p>info@disasterrelief.org</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Call Us</strong>
+                                    <p>(555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Visit Us</strong>
+                                    <p>123 Relief Street, Help City, HC 12345</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="volunteer-form">
+                        <h2>Volunteer With Us</h2>
+                        <form id="volunteer-form">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="skills">Skills/Interests</label>
+                                <select id="skills" name="skills">
+                                    <option value="">Select your area of interest</option>
+                                    <option value="tech">Technology/Development</option>
+                                    <option value="data">Data Management</option>
+                                    <option value="outreach">Community Outreach</option>
+                                    <option value="logistics">Logistics/Operations</option>
+                                    <option value="fundraising">Fundraising</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Submit Application</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="donate" class="page-section">
+            <div class="content-section">
+                <div class="donation-container">
+                    <div class="donation-intro">
+                        <h2>Support Our Mission</h2>
+                        <p>Your donation helps us provide critical resources and support to communities affected by
+                            disasters. Every contribution makes a difference.</p>
+
+                        <div class="impact-stats">
+                            <div class="stat">
+                                <div class="stat-number">$50</div>
+                                <div class="stat-label">Provides emergency supplies for one family</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">$100</div>
+                                <div class="stat-label">Funds a hot meal program for 50 people</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">$500</div>
+                                <div class="stat-label">Supports emergency shelter operations for a week</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="donation-form">
+                        <h2>Make a Donation</h2>
+                        <form id="donation-form">
+                            <div class="donation-options">
+                                <div class="amount-buttons">
+                                    <button type="button" class="amount-btn" data-amount="25">$25</button>
+                                    <button type="button" class="amount-btn" data-amount="50">$50</button>
+                                    <button type="button" class="amount-btn" data-amount="100">$100</button>
+                                    <button type="button" class="amount-btn" data-amount="250">$250</button>
+                                </div>
+
+                                <div class="frequency-buttons">
+                                    <button type="button" class="freq-btn active"
+                                        data-frequency="once">One-time</button>
+                                    <button type="button" class="freq-btn" data-frequency="monthly">Monthly</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="donor-name">Full Name</label>
+                                <input type="text" id="donor-name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="donor-email">Email Address</label>
+                                <input type="email" id="donor-email" name="email" required>
+                            </div>
+
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="anonymous" name="anonymous">
+                                <label for="anonymous" class="checkbox-label">
+                                    <span>Make this donation anonymous</span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="donate-btn">Complete Donation</button>
+                        </form>
+                    </div>
+
+                    <div class="other-ways">
+                        <h2>Other Ways to Help</h2>
+                        <div class="help-options">
+                            <div class="help-option">
+                                <i class="fas fa-user-friends"></i>
+                                <h4>Volunteer</h4>
+                                <p>Share your time and skills to help those in need.</p>
+                                <a href="#contact" class="help-link">Get Involved</a>
+                            </div>
+                            <div class="help-option">
+                                <i class="fas fa-bullhorn"></i>
+                                <h4>Spread the Word</h4>
+                                <p>Help us reach more people by sharing our mission.</p>
+                                <a href="#" class="share-btn">Share Now</a>
+                            </div>
+                            <div class="help-option">
+                                <i class="fas fa-building"></i>
+                                <h4>Corporate Partnership</h4>
+                                <p>Partner with us to make a larger impact in your community.</p>
+                                <a href="#contact" class="help-link">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
