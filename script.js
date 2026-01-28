@@ -16,8 +16,7 @@ function initMap() {
 
     // Add OpenStreetMap tiles
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
-        maxZoom: 19
+        attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
     // Add markers for sample resources
@@ -30,7 +29,11 @@ function initMap() {
 function addResourceMarkers() {
     resources.forEach(resource => {
         const marker = L.marker([resource.lat, resource.lng]).addTo(map);
-        marker.bindPopup(`<div><strong>${resource.name}</strong><br>Type: ${resource.type}<br>Address: ${resource.address}</div>`);
+
+        const popup = L.popup()
+            .setContent(`<div><strong>${resource.name}</strong><br>Type: ${resource.type}<br>Address: ${resource.address}</div>`);
+
+        marker.bindPopup(popup);
 
         markers.push(marker);
     });
@@ -68,13 +71,55 @@ function searchResources(query) {
     // Clear existing markers
     clearMarkers();
 
-    // For open source alternative, we'll show sample resources
-    // In a real implementation, you could integrate with OpenStreetMap Nominatim API or other services
-    setTimeout(() => {
-        hideSpinner();
-        alert('Search functionality now uses sample disaster relief resources. For a full implementation, consider integrating with OpenStreetMap Nominatim API or other open geocoding services.');
-        addResourceMarkers();
-    }, 1000);
+    // Use Nominatim API for geocoding
+    const nominatimUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`;
+
+    fetch(nominatimUrl)
+        .then(response => response.json())
+        .then(data => {
+            hideSpinner();
+            if (data && data.length > 0) {
+                const result = data[0];
+                const lat = parseFloat(result.lat);
+                const lng = parseFloat(result.lon);
+
+                // Center map on search result
+                map.setView([lat, lng], 14);
+
+                // Add a marker for the search result
+                const searchMarker = L.marker([lat, lng]).addTo(map);
+                const popup = L.popup()
+                    .setContent(`<div><strong>Search Result</strong><br>${result.display_name}</div>`);
+                searchMarker.bindPopup(popup);
+                markers.push(searchMarker);
+
+                // Find nearby resources within 10km
+                const nearbyResources = resources.filter(resource => {
+                    const distance = getDistance(lat, lng, resource.lat, resource.lng);
+                    return distance <= 10; // 10km
+                });
+
+                // Add markers for nearby resources
+                nearbyResources.forEach(resource => {
+                    const marker = L.marker([resource.lat, resource.lng]).addTo(map);
+                    const popup = L.popup()
+                        .setContent(`<div><strong>${resource.name}</strong><br>Type: ${resource.type}<br>Address: ${resource.address}</div>`);
+                    marker.bindPopup(popup);
+                    markers.push(marker);
+                });
+
+                updateResourceList(nearbyResources);
+            } else {
+                alert('Location not found. Showing all available resources.');
+                addResourceMarkers();
+            }
+        })
+        .catch(error => {
+            console.error('Error searching:', error);
+            hideSpinner();
+            alert('Search failed. Showing all available resources.');
+            addResourceMarkers();
+        });
 }
 
 function getCurrentLocation() {
@@ -86,16 +131,21 @@ function getCurrentLocation() {
 
             map.setView([userLat, userLng], 14);
 
-            // Find nearby resources within 10km
+            // Find nearby resources within 10km (using simple distance calculation)
             const nearbyResources = resources.filter(resource => {
-                const distance = map.distance([userLat, userLng], [resource.lat, resource.lng]);
-                return distance <= 10000; // 10km in meters
+                const distance = getDistance(userLat, userLng, resource.lat, resource.lng);
+                return distance <= 10; // 10km
             });
 
             clearMarkers();
             nearbyResources.forEach(resource => {
                 const marker = L.marker([resource.lat, resource.lng]).addTo(map);
-                marker.bindPopup(`<div><strong>${resource.name}</strong><br>Type: ${resource.type}<br>Address: ${resource.address}</div>`);
+
+                const popup = L.popup()
+                    .setContent(`<div><strong>${resource.name}</strong><br>Type: ${resource.type}<br>Address: ${resource.address}</div>`);
+
+                marker.bindPopup(popup);
+
                 markers.push(marker);
             });
 
@@ -108,6 +158,19 @@ function getCurrentLocation() {
         hideSpinner();
         alert('Geolocation is not supported by this browser.');
     }
+}
+
+// Simple distance calculation function (Haversine formula)
+function getDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLng/2) * Math.sin(dLng/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const distance = R * c;
+    return distance;
 }
 
 function clearMarkers() {
@@ -149,7 +212,46 @@ function hideSpinner() {
     spinner.classList.add('hidden');
 }
 
-// Initialize the map when the page loads
+// Single-page navigation
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // Show the selected section
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Handle navigation clicks
+function handleNavClick(e) {
+    e.preventDefault();
+    const href = e.target.getAttribute('href');
+    if (href && href.startsWith('#')) {
+        const sectionId = href.substring(1);
+        showSection(sectionId);
+        // Update URL without reloading
+        history.pushState(null, null, href);
+    }
+}
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', function(e) {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        showSection(hash);
+    } else {
+        showSection('home');
+    }
+});
+
+
+
+// Initialize the page when the page loads
 window.onload = function() {
     // Hamburger menu toggle
     const hamburger = document.querySelector('.hamburger');
@@ -162,6 +264,16 @@ window.onload = function() {
         });
     }
 
+    // Handle navigation links
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', handleNavClick);
+    });
+
+    // Handle other links that should navigate within the page
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', handleNavClick);
+    });
+
     // Close mobile menu when clicking on a link
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
@@ -170,5 +282,16 @@ window.onload = function() {
         });
     });
 
+    // Check initial hash on page load
+    const initialHash = window.location.hash.substring(1);
+    if (initialHash) {
+        showSection(initialHash);
+    } else {
+        showSection('home');
+    }
+
     initMap();
+    // initChatbot(); // Commented out - function not defined
+    // initPrediction(); // Commented out - function not defined
 };
+
