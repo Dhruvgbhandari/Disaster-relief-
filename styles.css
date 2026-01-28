@@ -1,4 +1,4 @@
-:root {
+::root {
     --bg-dark: #020617;
     --bg-mid: #0f172a;
     --card-bg: rgba(255, 255, 255, 0.08);
@@ -259,3 +259,79 @@ button:hover {
         font-size: 2.1rem;
     }
 }
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 15, 25, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #fff;
+    font-weight: 600;
+}
+
+.nav-icon {
+    font-size: 1.3rem;
+    color: #4da3ff;
+}
+
+.nav-title {
+    font-size: 1.1rem;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #4da3ff;
+}
+
+.donate-btn-nav {
+    background: #4da3ff;
+    color: #000 !important;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* HAMBURGER */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 22px;
+    height: 2px;
+    background: #fff;
+}
+
