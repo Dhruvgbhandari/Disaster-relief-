@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Map - Disaster Relief Resource Locator</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+    <div id="three-bg"></div>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <h1>Disaster Relief Resource Locator</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="map.html">Interactive Map</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="help.html">Help</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+        <h1>Interactive Disaster Relief Map</h1>
+        <p>Explore disaster relief resources in Dahanu and Palghar, Maharashtra</p>
+    </header>
+
+    <main>
+        <div class="map-section">
+            <div class="map-controls">
+                <div id="search-container">
+                    <input type="text" id="location-input" placeholder="Enter your location">
+                    <button id="search-btn"><i class="fas fa-search"></i> Search</button>
+                    <button id="current-location-btn"><i class="fas fa-map-marker-alt"></i> Use Current
+                        Location</button>
+                    <div id="loading-spinner" class="hidden"><i class="fas fa-spinner fa-spin"></i> Searching...</div>
+                </div>
+
+                <div class="map-legend">
+                    <h3>Resource Types</h3>
+                    <div class="legend-item">
+                        <i class="fas fa-home" style="color: #ef4444;"></i>
+                        <span>Shelter</span>
+                    </div>
+                    <div class="legend-item">
+                        <i class="fas fa-utensils" style="color: #ef4444;"></i>
+                        <span>Food</span>
+                    </div>
+                    <div class="legend-item">
+                        <i class="fas fa-hospital" style="color: #ef4444;"></i>
+                        <span>Medical</span>
+                    </div>
+                    <div class="legend-item">
+                        <i class="fas fa-tint" style="color: #ef4444;"></i>
+                        <span>Water</span>
+                    </div>
+                    <div class="legend-item">
+                        <i class="fas fa-box" style="color: #ef4444;"></i>
+                        <span>Supplies</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="map"></div>
+
+            <div id="resource-list">
+                <h2>Nearby Resources</h2>
+                <ul id="resources"></ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emergency Contacts</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> Emergency: 112</li>
+                    <li><i class="fas fa-ambulance"></i> Medical: 108</li>
+                    <li><i class="fas fa-fire"></i> Fire: 101</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-external-link-alt"></i> NDMA</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt"></i> Red Cross</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt"></i> Local Authorities</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Disaster Relief Resource Locator. Built for communities in need.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+    <script src="three-bg.js"></script>
+    <script src="map-script.js"></script>
+</body>
+
+</html>

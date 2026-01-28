@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - Disaster Relief Resource Locator</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="three-bg"></div>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <h1>Disaster Relief Resource Locator</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="help.html">Help</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+        <h1>Make a Donation</h1>
+        <p>Your support helps us provide critical resources to communities in need.</p>
+    </header>
+
+    <main>
+        <div class="content-section">
+            <div class="donation-container">
+                <div class="donation-intro">
+                    <h2>Support Disaster Relief Efforts</h2>
+                    <p>Your donation directly supports our mission to connect people with essential resources during
+                        emergencies. Every contribution, no matter the size, makes a difference in helping communities
+                        recover and rebuild.</p>
+
+                    <div class="impact-stats">
+                        <div class="stat">
+                            <div class="stat-number">10,000+</div>
+                            <div class="stat-label">People Helped</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Resources Located</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support Available</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="donation-form">
+                    <h2>Make Your Donation</h2>
+
+                    <div class="donation-options">
+                        <div class="option-group">
+                            <h3>Select Amount</h3>
+                            <div class="amount-buttons">
+                                <button class="amount-btn" data-amount="25">$25</button>
+                                <button class="amount-btn" data-amount="50">$50</button>
+                                <button class="amount-btn" data-amount="100">$100</button>
+                                <button class="amount-btn" data-amount="250">$250</button>
+                                <button class="amount-btn custom" data-amount="custom">Custom</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <h3>Donation Frequency</h3>
+                            <div class="frequency-buttons">
+                                <button class="freq-btn active" data-frequency="one-time">One-time</button>
+                                <button class="freq-btn" data-frequency="monthly">Monthly</button>
+                                <button class="freq-btn" data-frequency="yearly">Yearly</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="donation-form">
+                        <div class="form-group">
+                            <label for="donor-name">Full Name</label>
+                            <input type="text" id="donor-name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="donor-email">Email Address</label>
+                            <input type="email" id="donor-email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="custom-amount">Donation Amount ($)</label>
+                            <input type="number" id="custom-amount" name="amount" min="1" step="0.01"
+                                placeholder="Enter amount">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="donation-purpose">How would you like your donation used?</label>
+                            <select id="donation-purpose" name="purpose">
+                                <option value="general">General Support</option>
+                                <option value="technology">Technology & Development</option>
+                                <option value="emergency">Emergency Response</option>
+                                <option value="education">Education & Awareness</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="anonymous" id="anonymous">
+                                Make this donation anonymous
+                            </label>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="newsletter" id="newsletter" checked>
+                                Subscribe to our newsletter for updates
+                            </label>
+                        </div>
+
+                        <button type="submit" class="donate-btn">Complete Donation</button>
+                    </form>
+                </div>
+
+                <div class="other-ways">
+                    <h2>Other Ways to Help</h2>
+                    <div class="help-options">
+                        <div class="help-option">
+                            <i class="fas fa-users"></i>
+                            <h4>Volunteer</h4>
+                            <p>Join our team of dedicated volunteers.</p>
+                            <a href="contact.html" class="help-link">Sign Up</a>
+                        </div>
+                        <div class="help-option">
+                            <i class="fas fa-share-alt"></i>
+                            <h4>Spread the Word</h4>
+                            <p>Share our mission with friends and family.</p>
+                            <button class="share-btn">Share</button>
+                        </div>
+                        <div class="help-option">
+                            <i class="fas fa-box"></i>
+                            <h4>Donate Supplies</h4>
+                            <p>Contribute essential supplies to our distribution centers.</p>
+                            <a href="contact.html" class="help-link">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Emergency Contacts</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> Emergency: 911</li>
+                    <li><i class="fas fa-ambulance"></i> Medical: 911</li>
+                    <li><i class="fas fa-fire"></i> Fire: 911</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-external-link-alt"></i> FEMA</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt"></i> Red Cross</a></li>
+                    <li><a href="#"><i class="fas fa-external-link-alt"></i> Local Authorities</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Disaster Relief Resource Locator. Built for communities in need.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+    <script src="three-bg.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
